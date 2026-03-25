@@ -26,9 +26,10 @@
             align-items: center;
             justify-content: center;
             margin: 0;
+            transition: background-color 0.3s ease;
         }
 
-        /* Meme Popup */
+        /* The Reaction Popup */
         #meme-box {
             position: fixed;
             top: 20px;
@@ -56,6 +57,7 @@
             position: relative;
         }
 
+        /* Pompompurin Beret */
         .card::before {
             content: '';
             position: absolute;
@@ -68,7 +70,7 @@
             border-radius: 20px 20px 0 0;
         }
 
-        h1 { font-family: 'Fredoka One', cursive; color: var(--purin-brown); }
+        h1 { font-family: 'Fredoka One', cursive; color: var(--purin-brown); margin-bottom: 20px; }
 
         #run-button {
             position: relative;
@@ -81,7 +83,8 @@
             z-index: 500;
             cursor: pointer;
             box-shadow: 0 4px 0 #4a2b1a;
-            transition: transform 0.1s ease, left 0.2s ease, top 0.2s ease;
+            /* Smooth movement and size scaling */
+            transition: transform 0.1s ease, left 0.15s ease, top 0.15s ease;
             white-space: nowrap;
         }
 
@@ -103,70 +106,78 @@
         <div id="meme-emoji" style="font-size: 50px;">🤡</div>
     </div>
 
-    <div style="font-size: 60px; top: 10%; left: 10%; position: fixed;">🐱</div>
-    <div style="font-size: 60px; bottom: 10%; right: 10%; position: fixed;">🍮</div>
+    <div style="font-size: 60px; top: 10%; left: 10%; position: fixed; opacity: 0.5;">🐶</div>
+    <div style="font-size: 60px; bottom: 10%; right: 10%; position: fixed; opacity: 0.5;">🍮</div>
 
     <div class="card">
         <h1>HBD TY! 🍮</h1>
-        <p>Happy Birthday, Ty! The pudding is waiting...</p>
+        <p>You want your gift? Catch the pudding first! ✨</p>
         
-        <div class="mt-5" style="height: 150px; display: flex; align-items: center; justify-content: center;">
-            <button id="run-button" onmouseover="move()">CLICK FOR GIFT 🎁</button>
+        <div class="mt-5" style="height: 140px; display: flex; align-items: center; justify-content: center;">
+            <button id="run-button" onmouseover="doChaos()">CLICK FOR GIFT 🎁</button>
         </div>
 
         <button class="btn btn-link text-muted mt-4" onclick="win()" style="text-decoration: none; font-size: 0.8rem; color: var(--purin-brown) !important;">
-            I surrender, give it here! 🥺
+            Suko na ko, give gift na 🥺
         </button>
     </div>
 
     <script>
-        const puns = ["Too small?", "Too big?", "Wait lang!", "Asa ka pa!", "Try again!", "Muntik na!", "Bleeh! 👅"];
-        const emojis = ["🤡", "🤣", "🤪", "👻", "🍮", "🙈", "🤏", "🐘"];
+        const puns = ["Too small?", "Too big?", "Wait lang!", "Asa ka pa!", "Muntik na!", "Bleeh! 👅", "Takbo!", "Too slow!"];
+        const emojis = ["🤡", "🤣", "🤪", "👻", "🍮", "🙈", "🤏", "🐘", "🐕"];
         let count = 0;
 
-        function move() {
+        function doChaos() {
             const btn = document.getElementById('run-button');
             const box = document.getElementById('meme-box');
             
-            // 1. Move Button
+            // 1. Move Button randomly
             const x = Math.random() * (window.innerWidth - 200);
-            const y = Math.random() * (window.innerHeight - 100);
+            const y = Math.random() * (window.innerHeight - 150);
             btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            btn.style.left = Math.max(10, x) + 'px';
+            btn.style.top = Math.max(10, y) + 'px';
             
-            // 2. Change Size (Scale between 0.5 and 1.8)
-            const randomScale = (Math.random() * (1.8 - 0.5) + 0.5).toFixed(2);
+            // 2. Change Size randomly (Scale from 0.4x to 1.7x)
+            const randomScale = (Math.random() * (1.7 - 0.4) + 0.4).toFixed(2);
             btn.style.transform = `scale(${randomScale})`;
             
-            // 3. Change Text & Emoji
+            // 3. Update Text & Meme Emoji
             btn.innerHTML = puns[Math.floor(Math.random() * puns.length)];
             document.getElementById('meme-emoji').innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
             
-            // 4. Show Meme
+            // 4. Show Meme Popup
             box.style.display = 'block';
             count++;
+
+            // Extra Makulit: Background color flicker
+            document.body.style.backgroundColor = count % 2 === 0 ? '#FFED66' : '#FFF4A3';
+
             setTimeout(() => { box.style.display = 'none'; }, 800);
         }
 
         function win() {
+            // Remove the floating background icons for cleaner look
+            document.querySelectorAll('div[style*="fixed"]').forEach(el => el.remove());
+
             document.querySelector('.card').innerHTML = `
-                <div style="font-size: 80px;">🎂</div>
-                <h2 style="font-family: 'Fredoka One'">TY WINS! 🏆</h2>
-                <p class="lead">Happy Birthday, Ty! You chased the button ${count} times!</p>
-                <p>Enjoy your special day, you absolute legend! 🍮✨</p>
+                <div style="font-size: 100px; margin-bottom: 10px;">🏆🍮</div>
+                <h2 style="font-family: 'Fredoka One'; color: var(--purin-brown);">HAPPY BIRTHDAY TY!</h2>
+                <p class="lead">You finally caught it! After <b>${count}</b> failed attempts.</p>
+                <p>Enjoy your special day, Ty! You're the MVP! 🥳✨</p>
                 <div class="mt-4">
-                    <button class="btn btn-dark" style="border-radius: 20px" onclick="location.reload()">Try Again? 🔄</button>
+                    <button class="btn btn-dark" style="border-radius: 20px; background: var(--purin-brown);" onclick="location.reload()">Reset Chaos 🔄</button>
                 </div>
             `;
             
-            // Confetti
+            // Full screen confetti shower
+            const colors = ['#633923', '#FFED66', '#FFB347', '#FFFFFF'];
             for(let i=0; i<80; i++) {
                 let c = document.createElement('div');
                 c.className = 'confetti';
                 c.style.left = Math.random() * 100 + 'vw';
                 c.style.top = '-20px';
-                c.style.backgroundColor = ['#633923', '#FFED66', '#FFB347', '#FFFFFF'][i%4];
+                c.style.backgroundColor = colors[i % 4];
                 c.style.animationDuration = (Math.random() * 2 + 1) + 's';
                 document.body.appendChild(c);
             }
