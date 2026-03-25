@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBD TY! 🍮🤡 (MEME EDITION)</title>
+    <title>HBD TY! 🍮🤡</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -17,8 +17,6 @@
 
         body {
             background-color: var(--purin-yellow);
-            background-image: radial-gradient(var(--purin-body) 2px, transparent 2px);
-            background-size: 30px 30px;
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
             overflow: hidden;
@@ -29,223 +27,174 @@
             color: var(--purin-brown);
         }
 
-        /* --- THE MEME BOX --- */
+        /* Fixed Meme Popup */
         #meme-box {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            width: 250px;
+            top: 20px;
+            right: 20px;
+            width: 220px;
             background: white;
-            border: 5px solid var(--purin-brown);
+            border: 4px solid var(--purin-brown);
             border-radius: 15px;
-            padding: 10px;
-            box-shadow: 10px 10px 0 var(--purin-accent);
-            z-index: 5;
-            display: none; /* Hidden by default */
+            padding: 8px;
+            box-shadow: 8px 8px 0 var(--purin-accent);
+            z-index: 1000;
+            display: none;
             text-align: center;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        #meme-box img {
-            max-width: 100%;
-            border-radius: 10px;
+
+        @keyframes popIn {
+            from { transform: scale(0) rotate(-10deg); }
+            to { transform: scale(1) rotate(0deg); }
+        }
+
+        #meme-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #eee;
         }
 
         .card {
             border: 8px solid var(--purin-brown);
-            border-radius: 50px;
-            box-shadow: 15px 15px 0px var(--purin-accent);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 12px 12px 0px var(--purin-accent);
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px;
             text-align: center;
             z-index: 10;
-            max-width: 500px;
+            max-width: 450px;
             position: relative;
         }
 
-        /* Pompompurin Hat Detail */
         .card::before {
             content: '';
             position: absolute;
-            top: -40px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 40px;
+            width: 80px;
+            height: 35px;
             background: var(--purin-brown);
-            border-radius: 20px 20px 0 0;
+            border-radius: 15px 15px 0 0;
         }
 
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--purin-brown);
-            font-size: 2.5rem;
-            margin-top: 10px;
-        }
-
-        .animated-purin {
-            position: fixed;
-            width: 130px;
-            filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.1));
-            animation: waddle 2s ease-in-out infinite alternate;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        @keyframes waddle {
-            from { transform: rotate(-10deg) translateY(0); }
-            to { transform: rotate(10deg) translateY(-10px); }
-        }
+        h1 { font-family: 'Fredoka One', cursive; color: var(--purin-brown); }
 
         #run-button {
             position: relative;
             background-color: var(--purin-brown);
-            border: 5px solid #4a2b1a;
+            border: none;
             color: white;
-            padding: 15px 30px;
+            padding: 15px 25px;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.1s ease-out;
+            font-size: 1.1rem;
+            transition: all 0.1s ease;
             z-index: 100;
             cursor: pointer;
             box-shadow: 0 5px 0 #4a2b1a;
         }
-        #run-button:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #4a2b1a;
-        }
 
-        .pudding-confetti {
+        .confetti {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            width: 12px;
+            height: 12px;
             animation: fall 3s linear forwards;
-            z-index: 20;
+            z-index: 5;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .floating-cat {
+            position: fixed;
+            width: 80px;
+            pointer-events: none;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite alternate;
         }
+        @keyframes float { from { transform: translateY(0); } to { transform: translateY(-20px); } }
     </style>
 </head>
 <body>
 
     <div id="meme-box">
-        <p class="fw-bold m-0 mb-1">Missed again! 😂</p>
-        <img src="" id="meme-img" alt="Birthday Meme">
+        <p id="meme-text" style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">MUNTIK NA TY! 😂</p>
+        <img src="" id="meme-img" alt="Meme">
     </div>
 
-    <div class="cat-container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTBpaHNpZ3R4bmN6YjB5bm96Ym96Ym96Ym96Ym96Ym96Ym96JmN0PXM/U6X7Nq8zY0C6W0Xp8x/giphy.gif" class="animated-purin" style="top:10%; left:10%;">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTBpaHNpZ3R4bmN6YjB5bm96Ym96Ym96Ym96Ym96Ym96Ym96JmN0PXM/3o72EX5QZ9N9d51dqo/giphy.gif" class="animated-purin" style="bottom:10%; right:10%;">
-    </div>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PXM/U6X7Nq8zY0C6W0Xp8x/giphy.gif" class="floating-cat" style="top:10%; left:10%;">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PXM/3o72EX5QZ9N9d51dqo/giphy.gif" class="floating-cat" style="bottom:10%; right:10%;">
 
-    <div class="container d-flex justify-content-center">
-        <div class="card position-relative">
-            <h1>HBD TY! 🍮</h1>
-            <p class="lead fw-bold">Happy Birthday, Ty! Look! A wild pudding appears!</p>
-            <p>Click the button to claim your gift! 🎁</p>
-            
-            <div class="mt-5" style="height: 120px;">
-                <button id="run-button" onmouseover="actionChaos()">CLAIM GIFT 🎁</button>
-            </div>
-
-            <button class="btn btn-link text-muted mt-3" onclick="giveUp()" style="text-decoration: none; font-size: 0.8rem; color: var(--purin-brown) !important;">
-                I surrender, just give me the gift 🥺
-            </button>
+    <div class="card">
+        <h1>HBD TY! 🍮</h1>
+        <p class="fw-bold">Will you accept your Pompompurin gift? ✨</p>
+        
+        <div class="mt-5" style="height: 100px;">
+            <button id="run-button" onmouseover="doChaos()">ACCEPT GIFT 🎁</button>
         </div>
+
+        <button class="btn btn-link mt-3" onclick="victory()" style="color: var(--purin-brown); text-decoration: none; font-size: 0.8rem;">
+            Okay, I give up... let me win 🥺
+        </button>
     </div>
 
     <script>
-        // --- MEME DATABASE ---
-        const memeImages = [
-            "https://i.imgflip.com/65x5jg.jpg", // Surprise Pikachu
-            "https://i.imgflip.com/2/4t0m5.jpg", // Distracted Boyfriend
-            "https://i.imgflip.com/1ur9b0.jpg", // Mocking Spongebob
-            "https://media.makeameme.org/created/muntik-na-ac1665a07c.jpg", // Muntik Na Filipino Meme
-            "https://i.imgflip.com/8m58v6.jpg", // Sad Cat
-            "https://i.imgflip.com/39tko2.jpg"  // Woman Yelling at Cat
+        // High-reliability meme links (using direct Giphy/Imgur CDNs)
+        const memes = [
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/mlvseq9yvZhba/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/vFKqnCdLPNOKc/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/3o72EX5QZ9N9d51dqo/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/j38Xv4P89ePqFz2A2O/giphy.gif"
         ];
 
-        const messages = [
-            "Wait lang, Ty!", 
-            "Asa ka pa! 😂", 
-            "Muntik na, Ty!", 
-            "Too slow!", 
-            "Womp Womp 🎺", 
-            "Try again later!", 
-            "Nyeee bleeh! 👅",
-            "Bawal gift today!"
-        ];
+        const catchphrases = ["ASASA TY!", "MUNTIK NA!", "DI MO KAYA!", "BAGAL!", "BLEHHH!", "TY NO!", "BYE BYE!", "NO GIFT!"];
+        let count = 0;
 
-        let missCount = 0;
-
-        function actionChaos() {
-            moveButton();
-            showMeme();
-            missCount++;
-        }
-
-        function moveButton() {
+        function doChaos() {
             const btn = document.getElementById('run-button');
-            
-            // Random movement within safe bounds
-            const x = Math.random() * (window.innerWidth - btn.clientWidth - 80) + 40;
-            const y = Math.random() * (window.innerHeight - btn.clientHeight - 80) + 40;
-            
+            const box = document.getElementById('meme-box');
+            const img = document.getElementById('meme-img');
+
+            // Move Button
+            const x = Math.random() * (window.innerWidth - btn.clientWidth - 40);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight - 40);
             btn.style.position = 'fixed';
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
+            btn.innerHTML = catchphrases[Math.floor(Math.random() * catchphrases.length)];
+
+            // Show Meme
+            img.src = memes[count % memes.length];
+            box.style.display = 'block';
             
-            // Update text to be "makulit"
-            btn.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+            count++;
+
+            setTimeout(() => { box.style.display = 'none'; }, 1500);
         }
 
-        function showMeme() {
-            const memeBox = document.getElementById('meme-box');
-            const memeImg = document.getElementById('meme-img');
-
-            // Set random meme
-            memeImg.src = memeImages[Math.floor(Math.random() * memeImages.length)];
-            
-            // Show box
-            memeBox.style.display = 'block';
-
-            // Hide box after 2 seconds
-            setTimeout(() => {
-                memeBox.style.display = 'none';
-            }, 2000);
-        }
-
-        function giveUp() {
+        function victory() {
             const card = document.querySelector('.card');
-            // Hide the meme box if it's showing
-            document.getElementById('meme-box').style.display = 'none';
-
             card.innerHTML = `
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/Nm8ZPAGOwZUQM/giphy.gif" class="img-fluid rounded-pill mb-4" style="border: 5px solid var(--purin-brown); max-width: 200px;">
-                
-                <h2 style="color: var(--purin-brown); font-family: 'Fredoka One';">OKAY, TY WIN! 🏆🍮</h2>
-                <p class="lead fw-bold">After missing ${missCount} times... you finally got it! Happy Birthday!</p>
-                <p>May your day be full of pudding and zero stress. You legend!</p>
-                
-                <div class="mt-4">
-                    <button class="btn btn-lg" style="background: var(--purin-brown); color: white; border-radius: 30px; border: 4px solid #4a2b1a;" onclick="location.reload()">Play Again? 🔄</button>
-                </div>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/xT0xeMA62E1XPRvYfC/giphy.gif" class="img-fluid rounded mb-3" style="border: 4px solid var(--purin-brown)">
+                <h2>HAPPY BIRTHDAY TY! 🍮🏆</h2>
+                <p>You tried ${count} times! You deserve all the pudding today!</p>
+                <button class="btn mt-3" style="background: var(--purin-brown); color:white; border-radius:20px" onclick="location.reload()">Reset Chaos</button>
             `;
-            spawnPuddingConfetti();
+            makeConfetti();
         }
 
-        function spawnPuddingConfetti() {
-            const colors = ['#633923', '#FFED66', '#FFF4A3', '#FFB347'];
+        function makeConfetti() {
+            const colors = ['#633923', '#FFED66', '#FFB347'];
             for(let i=0; i<100; i++) {
-                const conf = document.createElement('div');
-                conf.classList.add('pudding-confetti');
-                conf8.style.left = Math.random() * 100 + 'vw';
-                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                conf.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                conf.style.top = "-20px";
-                document.body.appendChild(conf);
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.top = '-10px';
+                c.style.backgroundColor = colors[Math.floor(Math.random()*3)];
+                c.style.animationDuration = (Math.random()*3 + 2) + 's';
+                document.body.appendChild(c);
             }
         }
     </script>
