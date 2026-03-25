@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBD TY! 🍮 (Guaranteed Chaos)</title>
+    <title>HBD TY! 🍮✨</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --purin-yellow: #FFF4A3; /* Light Yellow Background */
-            --purin-body: #FFED66;   /* Brighter Yellow */
-            --purin-brown: #633923;  /* Chocolate Brown */
-            --purin-accent: #FFB347; /* Orange/Gold Accent */
+            --purin-yellow: #FFF4A3;
+            --purin-body: #FFED66;
+            --purin-brown: #633923;
+            --purin-accent: #FFB347;
         }
 
         body {
             background-color: var(--purin-yellow);
-            background-image: radial-gradient(var(--purin-body) 2px, transparent 2px);
-            background-size: 35px 35px;
+            background-image: radial-gradient(var(--purin-brown) 1px, transparent 1px);
+            background-size: 40px 40px;
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
             overflow: hidden;
@@ -26,265 +26,149 @@
             align-items: center;
             justify-content: center;
             margin: 0;
-            color: var(--purin-brown);
         }
 
-        /* --- THE EMOTIONAL DAMAGE BOX (No Images!) --- */
-        #status-box {
+        /* Meme Popup */
+        #meme-box {
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 250px;
+            width: 180px;
             background: white;
-            border: 6px solid var(--purin-brown);
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 10px 10px 0 var(--purin-accent);
-            z-index: 1000; /* Always on top */
-            display: none; /* Hidden by default */
+            border: 4px solid var(--purin-brown);
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 8px 8px 0 var(--purin-accent);
+            z-index: 1000;
+            display: none;
             text-align: center;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes popIn {
-            from { transform: scale(0) rotate(-10deg); }
-            to { transform: scale(1) rotate(0deg); }
-        }
-
-        #status-emoji {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        #status-text {
-            font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.2;
-        }
-
-        /* --- THE MAIN CARD --- */
         .card {
-            border: 10px solid var(--purin-brown);
+            border: 8px solid var(--purin-brown);
             border-radius: 50px;
             box-shadow: 15px 15px 0px var(--purin-accent);
-            background: rgba(255, 255, 255, 0.98);
+            background: white;
             padding: 40px;
             text-align: center;
             z-index: 10;
-            max-width: 480px;
+            max-width: 450px;
             position: relative;
         }
 
-        /* Pompompurin Brown Beret Hat Detail */
         .card::before {
             content: '';
             position: absolute;
-            top: -45px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
-            width: 110px;
-            height: 45px;
+            width: 80px;
+            height: 35px;
             background: var(--purin-brown);
             border-radius: 20px 20px 0 0;
         }
 
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--purin-brown);
-            font-size: 3rem;
-            margin-top: 10px;
-        }
+        h1 { font-family: 'Fredoka One', cursive; color: var(--purin-brown); }
 
-        /* --- THE RUNAWAY BUTTON --- */
         #run-button {
             position: relative;
             background-color: var(--purin-brown);
-            border: 6px solid #4a2b1a;
+            border: none;
             color: white;
-            padding: 18px 35px;
+            padding: 15px 30px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1.3rem;
-            transition: all 0.1s ease-out; /* Fast transition for 'makulit' feel */
-            z-index: 100;
+            z-index: 500;
             cursor: pointer;
-            box-shadow: 0 8px 0 #4a2b1a;
-        }
-        
-        #run-button:active {
-            transform: translateY(4px);
             box-shadow: 0 4px 0 #4a2b1a;
+            transition: transform 0.1s ease, left 0.2s ease, top 0.2s ease;
+            white-space: nowrap;
         }
 
-        /* --- DECORATIONS --- */
         .confetti {
             position: absolute;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%; /* Circle confetti */
+            width: 12px;
+            height: 12px;
             animation: fall 3s linear forwards;
-            z-index: 5;
+            z-index: 999;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(720deg); }
-        }
-
-        /* Simple Floating CSS Pudding (No Images!) */
-        .floating-pudding {
-            position: fixed;
-            width: 60px;
-            height: 50px;
-            background: var(--purin-body);
-            border: 5px solid var(--purin-brown);
-            border-radius: 15px 15px 5px 5px;
-            pointer-events: none;
-            z-index: 1;
-            animation: float 4s ease-in-out infinite alternate;
-        }
-        .floating-pudding::before { /* Pudding Topping */
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            width: 40px;
-            height: 15px;
-            background: var(--purin-brown);
-            border-radius: 10px 10px 0 0;
-        }
-        @keyframes float {
-            from { transform: translateY(0) rotate(-5deg); }
-            to { transform: translateY(-30px) rotate(5deg); }
-        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div id="status-box">
-        <span id="status-emoji">😹</span>
-        <p id="status-text">MUNTIK NA TY! 😂</p>
+    <div id="meme-box">
+        <p id="meme-text" class="m-0 fw-bold">Missed again! 😂</p>
+        <div id="meme-emoji" style="font-size: 50px;">🤡</div>
     </div>
 
-    <div class="floating-pudding" style="top:15%; left:10%;"></div>
-    <div class="floating-pudding" style="bottom:15%; right:10%; animation-delay: 1s;"></div>
-    <div class="floating-pudding" style="top:60%; left:5%; animation-delay: 2s; transform: scale(0.7);"></div>
+    <div style="font-size: 60px; top: 10%; left: 10%; position: fixed;">🐱</div>
+    <div style="font-size: 60px; bottom: 10%; right: 10%; position: fixed;">🍮</div>
 
-    <div class="container d-flex justify-content-center">
-        <div class="card position-relative">
-            <h1>HBD TY! 🍮</h1>
-            <p class="lead fw-bold">Happy Birthday, Ty! Your special pudding gift is ready! ✨</p>
-            <p>Just click the big brown button to claim it... if you can handle the sweetness! 🥄</p>
-            
-            <div class="mt-5" style="height: 130px;">
-                <button id="run-button" onmouseover="doChaos()">CLAIM PUDDING 🍮</button>
-            </div>
-
-            <button class="btn btn-link mt-4" onclick="giveUp()" style="color: var(--purin-brown); text-decoration: none; font-size: 0.9rem; font-weight: bold;">
-                I'm too full to chase pudding, just let me win... 🥺
-            </button>
+    <div class="card">
+        <h1>HBD TY! 🍮</h1>
+        <p>Happy Birthday, Ty! The pudding is waiting...</p>
+        
+        <div class="mt-5" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+            <button id="run-button" onmouseover="move()">CLICK FOR GIFT 🎁</button>
         </div>
+
+        <button class="btn btn-link text-muted mt-4" onclick="win()" style="text-decoration: none; font-size: 0.8rem; color: var(--purin-brown) !important;">
+            I surrender, give it here! 🥺
+        </button>
     </div>
 
     <script>
-        // --- DATA (Text-only, no external links!) ---
-        
-        // Memes/Phrases that appear in the popup box
-        const statusMemes = [
-            { emoji: "❌", text: "Too slow, Ty! Try again!" },
-            { emoji: "🍮", text: "Pudding used DODGE! It was super effective!" },
-            { emoji: "🤏", text: "Muntik na! As in ganito kakarampot!" },
-            { emoji: "🏃‍♂️", text: "Takbo, Ty, Takbo! Chase that dessert!" },
-            { emoji: "🤫", text: "Keep trying... maybe you'll get it by next birthday!" },
-            { emoji: "🤡", text: "Wait, are you even trying, Ty? 😂" },
-            { emoji: "🐢", text: "Ang bagal! Mas mabilis pa pagong!" },
-            { emoji: "👻", text: "Pudding became a ghost! BOO!" }
-        ];
+        const puns = ["Too small?", "Too big?", "Wait lang!", "Asa ka pa!", "Try again!", "Muntik na!", "Bleeh! 👅"];
+        const emojis = ["🤡", "🤣", "🤪", "👻", "🍮", "🙈", "🤏", "🐘"];
+        let count = 0;
 
-        // "Makulit" phrases that appear ON THE BUTTON itself
-        const buttonPhrases = [
-            "Wait lang!", 
-            "Asa ka pa! 😂", 
-            "Muntik na!", 
-            "Di mo kaya!", 
-            "Womp Womp 🎺", 
-            "Try mo ulit!", 
-            "Nyeee bleeh! 👅",
-            "Bawal diet!"
-        ];
-
-        let missCount = 0;
-
-        function doChaos() {
-            moveButton();
-            showStatusPopup();
-            missCount++;
-        }
-
-        function moveButton() {
+        function move() {
             const btn = document.getElementById('run-button');
+            const box = document.getElementById('meme-box');
             
-            // Random movement within safe bounds of the screen
-            const x = Math.random() * (window.innerWidth - btn.clientWidth - 100) + 50;
-            const y = Math.random() * (window.innerHeight - btn.clientHeight - 100) + 50;
-            
+            // 1. Move Button
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
             btn.style.position = 'fixed';
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
             
-            // Update button text to be "makulit"
-            btn.innerHTML = buttonPhrases[Math.floor(Math.random() * buttonPhrases.length)];
-        }
-
-        function showStatusPopup() {
-            const box = document.getElementById('status-box');
-            const emojiEl = document.getElementById('status-emoji');
-            const textEl = document.getElementById('status-text');
-
-            // Pick a random meme data object
-            const meme = statusMemes[Math.floor(Math.random() * statusMemes.length)];
+            // 2. Change Size (Scale between 0.5 and 1.8)
+            const randomScale = (Math.random() * (1.8 - 0.5) + 0.5).toFixed(2);
+            btn.style.transform = `scale(${randomScale})`;
             
-            // Update the popup content
-            emojiEl.innerHTML = meme.emoji;
-            textEl.innerHTML = meme.text;
+            // 3. Change Text & Emoji
+            btn.innerHTML = puns[Math.floor(Math.random() * puns.length)];
+            document.getElementById('meme-emoji').innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
             
-            // Show box
+            // 4. Show Meme
             box.style.display = 'block';
-
-            // Hide box automatically after 1.8 seconds
-            setTimeout(() => {
-                box.style.display = 'none';
-            }, 1800);
+            count++;
+            setTimeout(() => { box.style.display = 'none'; }, 800);
         }
 
-        function giveUp() {
-            const card = document.querySelector('.card');
-            // Ensure the status popup is hidden
-            document.getElementById('status-box').style.display = 'none';
-
-            // Victory Screen (Using direct Giphy CDN for high reliability)
-            card.innerHTML = `
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Y2N0Z3I3cXpueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/xT0xeMA62E1XPRvYfC/giphy.gif" class="img-fluid rounded mb-4" style="border: 6px solid var(--purin-brown); max-width: 250px;">
-                <h2 style="color: var(--purin-brown); font-family: 'Fredoka One'; font-size: 2.5rem;">HAPPY BIRTHDAY TY! 🏆🍮</h2>
-                <p class="lead fw-bold">After missing ${missCount} times... you finally caught the pudding!</p>
-                <p>May your day be full of sweetness, laughter, and zero stress. Enjoy your moment, Ty!</p>
+        function win() {
+            document.querySelector('.card').innerHTML = `
+                <div style="font-size: 80px;">🎂</div>
+                <h2 style="font-family: 'Fredoka One'">TY WINS! 🏆</h2>
+                <p class="lead">Happy Birthday, Ty! You chased the button ${count} times!</p>
+                <p>Enjoy your special day, you absolute legend! 🍮✨</p>
                 <div class="mt-4">
-                    <button class="btn btn-lg" style="background: var(--purin-brown); color: white; border-radius: 30px; border: 4px solid #4a2b1a;" onclick="location.reload()">Reset the Chaos 🔄</button>
+                    <button class="btn btn-dark" style="border-radius: 20px" onclick="location.reload()">Try Again? 🔄</button>
                 </div>
             `;
-            spawnPuddingConfetti();
-        }
-
-        function spawnPuddingConfetti() {
-            const colors = ['#633923', '#FFED66', '#FFF4A3', '#FFB347'];
-            for(let i=0; i<100; i++) {
-                const conf = document.createElement('div');
-                conf.classList.add('confetti');
-                conf.style.left = Math.random() * 100 + 'vw';
-                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                conf.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                conf.style.top = "-20px";
-                document.body.appendChild(conf);
+            
+            // Confetti
+            for(let i=0; i<80; i++) {
+                let c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.top = '-20px';
+                c.style.backgroundColor = ['#633923', '#FFED66', '#FFB347', '#FFFFFF'][i%4];
+                c.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(c);
             }
         }
     </script>
